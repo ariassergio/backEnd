@@ -104,9 +104,75 @@ productsRouter.get("/:pid", (req, res) => {
     });
 });
 
+
+// Ruta para actualizar un producto por su ID
+productsRouter.put("/:pid", (req, res) => {
+    const productId = req.params.pid; // Obtener el ID del producto de req.params
+    const updatedFields = req.body; // Obtener los campos actualizados del cuerpo de la solicitud
+
+    fs.readFile("products.json", "utf8", (err, data) => {
+        if (err) {
+            console.error("Error al leer el archivo JSON", err);
+            return res.status(500).send("Error interno del servidor");
+        }
+        
+        let products = JSON.parse(data);
+        const productIndex = products.findIndex(product => product.id == productId); // Buscar el índice del producto por su id
+
+        if (productIndex === -1) {
+            return res.status(404).send("Producto no encontrado");
+        }
+
+        // Actualizar el producto con los campos proporcionados
+        products[productIndex] = { ...products[productIndex], ...updatedFields };
+
+        // Escribir los datos actualizados en el archivo JSON
+        fs.writeFile("products.json", JSON.stringify(products, null, 2), (err) => {
+            if (err) {
+                console.error("Error al escribir en el archivo JSON", err);
+                return res.status(500).send("Error interno del servidor");
+            }
+            res.json({ message: "Producto actualizado correctamente", product: products[productIndex] });
+        });
+    });
+});
+
+// Ruta para eliminar un producto por su ID
+productsRouter.delete("/:pid", (req, res) => {
+    const productId = req.params.pid; // Obtener el ID del producto de req.params
+
+    fs.readFile("products.json", "utf8", (err, data) => {
+        if (err) {
+            console.error("Error al leer el archivo JSON", err);
+            return res.status(500).send("Error interno del servidor");
+        }
+        
+        let products = JSON.parse(data);
+        const productIndex = products.findIndex(product => product.id == productId); // Buscar el índice del producto por su id
+
+        if (productIndex === -1) {
+            return res.status(404).send("Producto no encontrado");
+        }
+
+        // Eliminar el producto del array de productos
+        products.splice(productIndex, 1);
+
+        // Escribir los datos actualizados en el archivo JSON
+        fs.writeFile("products.json", JSON.stringify(products, null, 2), (err) => {
+            if (err) {
+                console.error("Error al escribir en el archivo JSON", err);
+                return res.status(500).send("Error interno del servidor");
+            }
+            res.json({ message: "Producto eliminado correctamente" });
+        });
+    });
+});
+
+
+
 // Ruta para filtrar productos por categoría
-productsRouter.get("/categoria/:type", (req, res) => {
-    const type = req.params.type.toUpperCase(); // Obtener el tipo de categoría y convertirlo a mayúsculas
+productsRouter.get("/categoria/:category", (req, res) => {
+    const type = req.params.category.toUpperCase(); // Obtener el tipo de categoría y convertirlo a mayúsculas
 
     fs.readFile("products.json", "utf8", (err, data) => {
         if (err) {
@@ -116,7 +182,7 @@ productsRouter.get("/categoria/:type", (req, res) => {
         }
         
         const products = JSON.parse(data);
-        const filteredProducts = products.filter(product => product.type.toUpperCase() === type);
+        const filteredProducts = products.filter(product => product.category.toUpperCase() === type);
 
         if (filteredProducts.length === 0) {
             res.send("No se encontraron productos para esta categoría.");

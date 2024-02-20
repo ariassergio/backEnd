@@ -1,10 +1,62 @@
 [
-    { "id": 1, "name": "Naranjas", "type": "Fruta", "cantidad": 10, "price": 10 },
-    { "id": 2, "name": "Peras", "type": "Fruta", "cantidad": 15, "price": 10 },
-    { "id": 3, "name": "Manzanas", "type": "Fruta", "cantidad": 20, "price": 10 },
-    { "id": 4, "name": "Bananas", "type": "Fruta", "cantidad": 25, "price": 10 },
-    { "id": 5, "name": "Televisor", "type": "Electronicos", "cantidad": 10, "price": 10 },
-    { "id": 6, "name": "Parlantes", "type": "Electronicos", "cantidad": 15, "price": 10 },
-    { "id": 7, "name": "Auriculares", "type": "Electronicos", "cantidad": 20, "price": 10 },
-    { "id": 8, "name": "Mouse", "type": "Electronicos", "cantidad": 25, "price": 10 }
+  {
+    "id": 2,
+    "name": "Peras",
+    "category": "Fruta",
+    "cantidad": 15,
+    "price": 10
+  },
+  {
+    "id": 3,
+    "name": "Manzanas",
+    "category": "Fruta",
+    "cantidad": 20,
+    "price": 10
+  },
+  {
+    "id": 4,
+    "name": "Bananas",
+    "category": "Fruta",
+    "cantidad": 25,
+    "price": 10
+  },
+  {
+    "id": 5,
+    "name": "Televisor",
+    "category": "Electronicos",
+    "cantidad": 10,
+    "price": 10
+  },
+  {
+    "id": 6,
+    "name": "Parlantes",
+    "category": "Electronicos",
+    "cantidad": 15,
+    "price": 10
+  },
+  {
+    "id": 7,
+    "name": "Auriculares",
+    "category": "Electronicos",
+    "cantidad": 20,
+    "price": 10
+  },
+  {
+    "id": 8,
+    "name": "Mouse",
+    "category": "Electronicos",
+    "cantidad": 25,
+    "price": 10
+  },
+  {
+    "id": 9,
+    "title": "Producto de ejemplo",
+    "description": "Esta es una descripción de ejemplo para el producto.",
+    "code": "ABC123",
+    "price": 19.99,
+    "status": true,
+    "stock": 50,
+    "category": "Electronicos",
+    "thumbnails": []
+  }
 ]

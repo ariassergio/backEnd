@@ -7,6 +7,7 @@ const port = 8080;
 
 // Middleware para parsear el body de las solicitudes
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Monta el enrutador de productos en la ruta /api/products
 app.use("/api/products", productsRouter);
