@@ -1,11 +1,14 @@
 import express from "express";
 import fs from "fs";
+import { io, sendProductListViaSocket } from "./ProductsWebSocket.js";
 
 const productsRouter = express.Router();
 
 // Middleware para parsear el body de las solicitudes
 productsRouter.use(express.urlencoded({ extended: true }));
 productsRouter.use(express.json());
+
+
 
 // Ruta raíz GET para listar todos los productos
 productsRouter.get("/", (req, res) => {
@@ -77,6 +80,9 @@ productsRouter.post("/", (req, res) => {
                 console.error("Error al escribir en el archivo JSON", err);
                 return res.status(500).send("Error interno del servidor");
             }
+            // Enviar la lista de productos actualizada a través de WebSockets
+            sendProductListViaSocket(products);
+
             res.status(201).json({ message: "Producto agregado correctamente", product: newProduct });
         });
     });
