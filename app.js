@@ -1,5 +1,6 @@
 import express from "express";
 import exphbs  from "express-handlebars";
+import handlebars from "express-handlebars";
 import {engine} from "express-handlebars"; // Importa la función engine
 import http from "http"; // Importa el módulo http de Node.js
 import { Server } from "socket.io"; // Importa el servidor de Socket.IO
@@ -10,13 +11,15 @@ import fs from "fs";
 const app = express();
 const port = 8080;
 
-// Configurar Handlebars como motor de plantillas
-app.engine("handlebars", engine(exphbs()));
-app.set("view engine", "handlebars");
 
+app.set('view engine', 'handlebars');
 // Middleware para parsear el body de las solicitudes
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Configurar Handlebars como motor de plantillas
+app.engine('handlebars', handlebars.engine());
+
 
 // Monta el enrutador de productos en la ruta /api/products
 app.use("/api/products", productsRouter);
