@@ -7,10 +7,12 @@ import { Server } from "socket.io"; // Importa el servidor de Socket.IO
 import { productsRouter } from "./src/ProductsRouter.js";
 import cartRouter from "./src/CartRouter.js";
 import fs from "fs";
+import mongoose from "mongoose";
 
 const app = express();
 const port = 8080;
 
+const connection = mongoose.connect("mongodb+srv://sergioariaaas:W3tbatNjWzAXr2cx@cluster0.qh2nnui.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 app.set('view engine', 'handlebars');
 // Middleware para parsear el body de las solicitudes
@@ -61,3 +63,4 @@ function obtenerProductos() {
 
 // Iniciar el servidor HTTP
 server.listen(port, () => console.log("Servidor corriendo en ", port));
+
